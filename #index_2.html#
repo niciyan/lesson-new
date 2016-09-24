@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>index2</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+	  <script src="three.min.js"></script>
+	  <script>
+		  
+	    var scene = new THREE.Scene();
+	    var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+	    var renderer = new THREE.WebGLRenderer();
+	    renderer.setSize( window.innerWidth, window.innerHeight );
+	    document.body.appendChild( renderer.domElement );
+
+
+        var quaternion = new THREE.Quaternion();
+        quaternion.setFromAxisAngle( new THREE.Vector3( 0, 1, 0 ), Math.PI / 2 );
+
+        
+        vector.applyQuaternion( quaternion );
+
+	    var geometry = new THREE.BoxGeometry( 2, 2, 2, 3, 3, 3 );
+	    var material = new THREE.MeshBasicMaterial( { color: 0x00ff00, wireframe : true } );
+	    var cube = new THREE.Mesh( geometry, material );
+	    scene.add( cube );
+        cube.position.set(2,2,0);
+
+        
+
+        scene.add(vector);
+        
+	    camera.position.z = 10;
+
+	    var render = function() {
+        requestAnimationFrame(render);
+
+        cube.rotation.x += 0.01;
+
+	    renderer.render(scene, camera);
+	    };
+
+        render();
+	  </script>
+	</body>
+</html>
