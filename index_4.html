@@ -17,6 +17,7 @@
  
       var renderer = new THREE.WebGLRenderer({antialias:true});
       renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setClearColor('white');
       
       document.body.appendChild(renderer.domElement);
 
@@ -52,6 +53,7 @@
       var axis = new THREE.AxisHelper(10);
       axis.position.set(0,-3,0)
       scene.add(axis);
+
 
       
       camera.position.y = 3;

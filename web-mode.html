@@ -14,6 +14,7 @@
 
          var renderer = new THREE.WebGLRenderer({canvas:document.getElementById('myCanvas'), antialias:true});
          renderer.setSize(window.innerWidth, window.innerHeight);
+         renderer.setClearColor('white');
 
          var light = new THREE.DirectionalLight('pink');
          light.position.set(3,3,10);
@@ -23,7 +24,7 @@
          light2.position.set(-3,-3,-10);
          scene.add(light2);
          
-         var geometry = new THREE.BoxGeometry(1,1,1);
+         var geometry = new THREE.BoxGeometry(2,2,2);
          var material = new THREE.MeshPhongMaterial({color:'orange', wireframe:false});
          var cube = new THREE.Mesh(geometry, material);
          scene.add(cube);

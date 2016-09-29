@@ -12,7 +12,7 @@
 	 var scene = new THREE.Scene();
 	 var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,
 	                                          0.1, 1000);
- 
+
 	 var renderer = new THREE.WebGLRenderer({antialias:true});
      renderer.setSize(window.innerWidth, window.innerHeight);
 	 renderer.setClearColor( 0xffffff );
@@ -25,11 +25,11 @@
 
 	 sphere.position.set(0,0,0);
 
+   
 	 camera.position.z = 5;
 	 var controls = new THREE.OrbitControls(camera, renderer.doElement);
 	 var render = function () {
 	     requestAnimationFrame(render);
-
 	     sphere.rotation.y += 0.005;
 	     controls.update();
 	     renderer.render(scene, camera);
@@ -38,4 +38,4 @@
 	 render();
 </script>
 </body>
-</html> 
+</html>
