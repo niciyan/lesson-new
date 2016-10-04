@@ -8,7 +8,7 @@
   </head>
 
   <body>
-    <script src="three.js"></script>
+    <script src="three.min.js"></script>
     <script src="OrbitControls.js"></script>
     <script>
       var scene = new THREE.Scene();
@@ -51,7 +51,7 @@
       grid.position.set(0,-3,0);
 
       var axis = new THREE.AxisHelper(10);
-      axis.position.set(0,-3,0)
+      axis.position.set(0,-3,0);
       scene.add(axis);
 
 
@@ -60,7 +60,7 @@
       camera.position.z = 7;
       camera.lookAt(new THREE.Vector3(0,0,0));
       
-      var controls = new THREE.OrbitControls(camera, renderer.doElement);
+      var controls = new THREE.OrbitControls(camera, renderer.domElement);
       
       
       var render = function () {
