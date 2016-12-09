@@ -16,7 +16,7 @@
 <script>
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight,
-            0.1, 1000);
+        0.1, 1000);
 
     var renderer = new THREE.WebGLRenderer({antialias: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -35,9 +35,9 @@
 
     var material_cube_2 = new THREE.MeshPhongMaterial({color: 'lightgreen', wireframe: false});
     var cube2 = new THREE.Mesh(geometry_cube, material_cube_2);
+    cube2.position.y = 4;
     scene.add(cube2);
 
-    cube2.position.y = 4;
 
     var geometry = new THREE.SphereGeometry(1, 20, 20);
     var material = new THREE.MeshBasicMaterial({color: 'blue', wireframe: true});
@@ -50,8 +50,8 @@
     scene.add(torus);
 
     var grid = new THREE.GridHelper(10, 1);
-    scene.add(grid);
     grid.position.set(0, -3, 0);
+    scene.add(grid);
 
     var axis = new THREE.AxisHelper(10);
     axis.position.set(0, -3, 0);
@@ -66,22 +66,13 @@
 
     //    rendering function
     var i = 0;
-    function render(){
+    function render() {
 
         requestAnimationFrame(render);
 
         var theta = Math.PI / 180 * i;
 
-        circularMotion(sphere, 2, theta, false);
-        sphere.rotation.y += 0.01;
-
-        rotate_xz(cube, 0.01);
-
-        circularMotion(torus, 6, theta / 2, true);
-        torus.rotation.y += 0.01;
-
-        circularMotion(cube2, 3, theta * 2, true);
-        rotate_xz(cube2, 0.02);
+        animateMesh(sphere, cube, torus, cube2, theta);
 
         grid.rotation.y += 0.005;
         axis.rotation.y += 0.005;
@@ -92,17 +83,32 @@
         renderer.render(scene, camera);
     }
 
+    function animateMesh(sphere, cube, torus, cube2, theta) {
+        circularMotion(sphere, 2, theta, false);
+        sphere.rotation.y += 0.01;
+
+        rotateXZ(cube, 0.01);
+
+        circularMotion(torus, 6, theta / 2, true);
+        torus.rotation.y += 0.01;
+
+        circularMotion(cube2, 3, theta * 2, true);
+        rotateXZ(cube2, 0.02);
+
+
+    }
+
 
     function circularMotion(mesh, radius, angle, move_reverse) {
         var PARAM_REV = 1;
         if (move_reverse == true) {
             PARAM_REV *= -1;
         }
-        mesh.position.x =             radius * Math.cos(angle);
+        mesh.position.x = radius * Math.cos(angle);
         mesh.position.z = PARAM_REV * radius * Math.sin(angle);
     }
 
-    function rotate_xz(mesh, angle) {
+    function rotateXZ(mesh, angle) {
         mesh.rotation.x += angle;
         mesh.rotation.z += angle;
     }

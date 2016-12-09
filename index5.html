@@ -2,33 +2,67 @@
 <html lang="ja">
 
 <head>
-  <meta charset="UTF-8">
+    <meta charset="UTF-8">
     <title>index1</title>
-    <style>canvas { width: 100%; height: 100% }</style>  
+    <style>canvas {
+        width: 100%;
+        height: 100%;
+    }</style>
 </head>
 
 <body>
-  <script src="three.min.js"></script>
-  <script>
+<script src="three.min.js"></script>
+<script>
     var scene = new THREE.Scene();
-    var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,
-    0.1, 1000);
-    
+    var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight,
+        0.1, 1000);
+
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
-    
+    //    renderer.setClearColor(0xff0000);
+    renderer.setClearColor(0xfff4c8);
+
     document.body.appendChild(renderer.domElement);
 
-    var light = new THREE.DirectionalLight('white');
-    light.position.set(3, 3, 10).normalize();
-    scene.add( light );
-    
-    var geometry_cube = new THREE.BoxGeometry( 1, 1, 1, 3, 3, 3 );
-    var material_cube = new THREE.MeshPhongMaterial( { color: 'orange', wireframe : false } );
-    var cube = new THREE.Mesh( geometry_cube, material_cube );
-    scene.add( cube );
+    var geometryPlane = new THREE.CircleGeometry(1, 100);
+    var materialPlane = new THREE.MeshBasicMaterial({color: 0xff612e});
+    const NUM_OF_PLANES = 10;
+    var planeList = [];
+    for (var i = 0; i < NUM_OF_PLANES; i++) {
+        var plane = new THREE.Mesh(geometryPlane, materialPlane);
+        plane.rotateZ(Math.PI / 4);
+        planeList.push(plane);
+        scene.add(plane);
+    }
 
-  </script>
+    camera.position.z = 50;
+
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+    var start = 0;
+    const speedRendering = 2;
+    function render() {
+        requestAnimationFrame(render);
+        var theta = Math.PI / 180 * start;
+        animateMesh(planeList, theta);
+        start += speedRendering;
+        renderer.render(scene, camera);
+    }
+
+    function animateMesh(meshList, angle) {
+        for (var k = 0; k < meshList.length; k++) {
+            rotateMesh(meshList[k], angle + Math.PI * 2 * k / meshList.length);
+        }
+    }
+
+    const radius = 12;
+    function rotateMesh(mesh, angle) {
+        mesh.position.x = radius * Math.cos(angle);
+        mesh.position.y = radius * Math.sin(angle);
+    }
+    render();
+
+</script>
 </body>
 
 </html>
