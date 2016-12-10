@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ColorShow</title>
+</head>
+<body>
+<script src="../three.min.js"></script>
+<script src="../OrbitControls.js"></script>
+<script src="../templateProvider.js"></script>
+<script>
+    //    Don't forget add text renderer.render(scene, camera)
+    //    var color = new THREE.Color(0, 1, 1);
+    camera.position.z = 5;
+
+    var geometry = new THREE.BoxGeometry(1,1,1);
+    var material = new THREE.MeshBasicMaterial({color:'orange',wireframe:true});
+    var cube = new THREE.Mesh(geometry,material);
+    scene.add(cube);
+
+    var i = 0;
+    const speedOfRendering = 0.2;
+    function animate() {
+        requestAnimationFrame(animate);
+
+        cube.rotateY(0.01);
+        cube.rotateX(0.02);
+
+        var theta = Math.PI / 180 * i;
+        var red = determineRgb(theta);
+        var green = determineRgb(theta * 2);
+        var blue = determineRgb(theta / 2);
+        color = new THREE.Color("rgb(" + red.toString() + "," + green.toString() + "," + blue.toString() + ")");
+        renderer.setClearColor(color);
+        renderer.render(scene, camera);
+
+        i += speedOfRendering;
+
+    }
+    function determineRgb(angle) {
+        const RGB_MAX = 120;
+        return Math.floor(RGB_MAX * Math.abs(Math.cos(angle)));
+    }
+
+    animate();
+</script>
+</body>
+</html>
