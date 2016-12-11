@@ -28,13 +28,13 @@
 
     document.body.appendChild(renderer.domElement);
 
-    var geometryPlane = new THREE.CircleGeometry(1, 100);
+    var geometryPlane = new THREE.CircleGeometry(1, 3);
     var materialPlane = new THREE.MeshBasicMaterial({color: 0xff612e});
     const NUM_OF_PLANES = 10;
     var planeList = [];
     for (var i = 0; i < NUM_OF_PLANES; i++) {
         var plane = new THREE.Mesh(geometryPlane, materialPlane);
-        plane.rotateZ(Math.PI / 4);
+//        plane.rotateZ(Math.PI / 4);
         planeList.push(plane);
         scene.add(plane);
     }
