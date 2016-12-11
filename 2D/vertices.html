@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>vertices</title>
+</head>
+<body>
+<script src="../three.min.js"></script>
+<script src="../OrbitControls.js"></script>
+<script src="../templateProvider.js"></script>
+<script>
+    //    renderer.setClearColor('lightgray');
+    camera.position.x = 20;
+    camera.position.y = 20;
+    camera.position.z = 20;
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+    var geometry = new THREE.Geometry();
+    geometry.vertices.push(new THREE.Vector3(1, 0, 0));
+    //    geometry.vertices.push(new THREE.Vector3(1, 1, 1));
+
+    const radius = 10;
+    var material = new THREE.LineBasicMaterial({color: 'orange', linewidth: 5});
+    for (var k = 0; k < 1000; k++) {
+        var angle = Math.PI / 180 * k;
+        var cor = new THREE.Vector3(radius * Math.cos(angle), angle, radius * Math.sin(angle));
+        geometry.vertices.push(cor);
+    }
+    var line = new THREE.Line(geometry, material);
+    scene.add(line);
+
+    var axis = new THREE.AxisHelper(30);
+    scene.add(axis);
+
+    var grid = new THREE.GridHelper(10, 2);
+    scene.add(grid);
+
+    var geometrySphere = new THREE.SphereGeometry(1);
+    var materialSphere = new THREE.MeshBasicMaterial({color: 'purple', wireframe: true});
+    var sphere = new THREE.Mesh(geometrySphere, materialSphere);
+    scene.add(sphere);
+
+    var i = 0;
+    function animate() {
+        requestAnimationFrame(animate);
+
+        var theta = Math.PI / 180 * i;
+        sphere.position.x = radius * Math.cos(theta);
+        sphere.position.y = theta;
+        sphere.position.z = radius * Math.sin(theta);
+        if (i < 180) {
+            camera.position.x = radius * Math.cos(theta);
+
+        }
+            camera.position.y = 20 + theta;
+        i++;
+        controls.update();
+        renderer.render(scene, camera);
+    }
+    animate();
+</script>
+</body>
+</html>
