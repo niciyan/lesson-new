@@ -11,7 +11,7 @@
 </head>
 
 <body>
-<script src="three.min.js"></script>
+<script src="../three.min.js"></script>
 <script>
     var scene = new THREE.Scene();
     var camera = new THREE.PerspectiveCamera(
@@ -39,28 +39,42 @@
         scene.add(plane);
     }
 
+    var geometryCircle = new THREE.CircleGeometry(1, 100);
+    var materialCircle = new THREE.MeshBasicMaterial();
+    const NUM_OF_CIRCLES = 30;
+    var circleList = [];
+    for (var j = 0; j < NUM_OF_CIRCLES; j++) {
+        var circle = new THREE.Mesh(geometryCircle, materialCircle);
+        circleList.push(circle);
+        scene.add(circle);
+    }
+
     camera.position.z = 50;
 
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     var start = 0;
     const speedRendering = 2;
+    const radius_triangle = 12;
+    var radius_circle;
     function render() {
         requestAnimationFrame(render);
         var theta = Math.PI / 180 * start;
-        animateMesh(planeList, theta);
+        radius_circle = 18 + 12 * Math.sin(theta);
+        materialCircle.color = new THREE.Color("rgb(100,100," + Math.floor(200 * Math.abs(Math.cos(theta))).toString() + ")");
+        animateMesh(planeList, radius_triangle, theta);
+        animateMesh(circleList, radius_circle, theta);
         start += speedRendering + 1.5 * Math.sin(theta);
         renderer.render(scene, camera);
     }
 
-    function animateMesh(meshList, angle) {
+    function animateMesh(meshList, radius, angle) {
         for (var k = 0; k < meshList.length; k++) {
-            rotateMesh(meshList[k], angle + Math.PI * 2 * k / meshList.length);
+            rotateMesh(meshList[k], radius, angle + Math.PI * 2 * k / meshList.length);
         }
     }
 
-    const radius = 12;
-    function rotateMesh(mesh, angle) {
+    function rotateMesh(mesh, radius, angle) {
         mesh.position.x = radius * Math.cos(angle);
         mesh.position.y = radius * Math.sin(angle);
     }
