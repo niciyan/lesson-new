@@ -1,0 +1,123 @@
+<!doctype html>
+<head>
+  <title>Mathbox_sample</title>
+  <meta charset='utf-8'>
+  <script src="mathbox-bundle.js"></script>
+  <link rel="stylesheet" href="mathbox.css" type="text/css" />
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+</head>
+<body>
+  <script>
+    mathbox = mathBox({
+    plugins: ['core', 'controls', 'cursor'],
+    controls: {
+    klass: THREE.OrbitControls
+    },
+    camera: {
+    fov: 90,
+    }
+    });
+
+    var camera = mathbox.camera({
+        proxy:true,
+        position:[0,0,3],
+    });
+
+    var view = mathbox.cartesian({
+        range:[[-2,2], [-1,1] ],
+        scale:[2,1],
+    });
+
+    view
+      .axis({
+        axis: 1,
+        width: 3,
+    })
+      .axis({
+        axis: 2,
+        width: 3,
+    })
+      .grid({
+        width: 2,  
+        divideX: 50,
+        divideY: 50,        
+    });
+
+    var data =
+        view.interval({
+            expr: function (emit, x, i, t) {
+            emit(x, Math.sin(x + t));
+        },
+        width: 64,
+        channels: 2,
+    });
+
+    var curve =
+        view.line({
+            width: 5,
+            color: '#3090FF',
+    });
+
+    var points =
+        view.point({
+            size: 8,
+            color: '#3090FF',
+    });
+
+    var vector =
+        view.interval({
+            expr: function (emit, x, i, t) {
+                emit(x, 0);
+                emit(x, -Math.sin(x + t));
+            },
+            width: 64,
+            channels: 2,
+            items: 2,
+        })
+        .vector({
+            end: true,
+            width: 5,
+            color: '#50A000',
+        });
+
+	var scale = 
+		view.scale({
+			divide: 10,
+		});
+
+	var ticks = 
+		view.ticks({
+			width: 5,
+			size: 15,
+			color: 'black',
+		});
+
+	var format = 
+		view.format({
+			digits: 2,
+			weight: 'bold',
+		});
+
+	var labels = 
+		view.label({
+			color: 'red',
+			zIndex: 1,
+		});
+
+	var play = mathbox.play({
+		target: 'cartesian',
+		pace: 5,
+		to: 2,
+		loop:true,
+		script:[
+			{props: {range:[[-2,2], [-1,1] ]}},
+			{props: {range:[[-4.4], [-2,2]  ]}},
+			{props: {range:[[-2.2], [-1,1]  ]}},
+		]
+	});
+	
+  </script>
+</body>
+
+
+</html>

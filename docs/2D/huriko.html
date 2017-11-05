@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>huriko</title>
+</head>
+<body>
+<script src="../three.min.js"></script>
+<script src="../OrbitControls.js"></script>
+<script src="../templateProvider.js"></script>
+<script>
+    renderer.setClearColor('pink');
+    camera.position.z = 20;
+
+    var geometry = new THREE.CircleGeometry(1, 8);
+    var material = new THREE.MeshBasicMaterial({color: 'red', wireframe: false});
+    var circle = new THREE.Mesh(geometry, material);
+    scene.add(circle);
+
+    var i = 0;
+    function animate() {
+        requestAnimationFrame(animate);
+        var theta = Math.PI / 180 * i;
+        circle.position.x = 10 * Math.cos(3 * theta);
+        circle.position.y = 6 * Math.sin(3 * theta);
+        renderer.render(scene, camera);
+
+        controls.update();
+        i++;
+    }
+
+    animate()
+</script>
+</body>
+</html>

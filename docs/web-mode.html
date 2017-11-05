@@ -1,0 +1,46 @@
+<!doctype html>
+<html>
+    <head>
+        <title>web_mode</title>
+        <meta charset="utf-8" />
+        <script src="three.min.js"></script>
+        <script src="OrbitControls.js"></script>
+    </head>
+    <body>
+        <canvas id="myCanvas"></canvas>
+        <script>
+         var scene = new THREE.Scene();
+         var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight,0.1,1000);
+
+         var renderer = new THREE.WebGLRenderer({canvas:document.getElementById('myCanvas'), antialias:true});
+         renderer.setSize(window.innerWidth, window.innerHeight);
+         renderer.setClearColor('white');
+
+         var light = new THREE.DirectionalLight('pink');
+         light.position.set(3,3,10);
+         scene.add(light);
+
+         var light2 = new THREE.DirectionalLight('white');
+         light2.position.set(-3,-3,-10);
+         scene.add(light2);
+         
+         var geometry = new THREE.BoxGeometry(2,2,2);
+         var material = new THREE.MeshPhongMaterial({color:'orange', wireframe:false});
+         var cube = new THREE.Mesh(geometry, material);
+         scene.add(cube);
+
+         var controls = new THREE.OrbitControls(camera,renderer.doElement);
+         camera.position.z = 10;
+         
+         function render() {
+             cube.rotation.x += 0.005;
+             cube.rotation.y += 0.005;
+             requestAnimationFrame(render);
+             renderer.render(scene, camera);
+             controls.update();
+         }
+
+         render();
+        </script>
+    </body>
+</html>

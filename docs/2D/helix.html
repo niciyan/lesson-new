@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>helix</title>
+</head>
+<body>
+<script src="../three.min.js"></script>
+<script src="../OrbitControls.js"></script>
+<script src="../templateProvider.js"></script>
+<script>
+    camera.position.x = 20;
+    camera.position.y = 20;
+    camera.position.z = 20;
+    //    camera.position = new THREE.Vector3(100,100,100);
+    camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+    var grid = new THREE.GridHelper(100, 5);
+    scene.add(grid);
+
+    var axis = new THREE.AxisHelper(100);
+    scene.add(axis);
+
+    var geometry = new THREE.SphereGeometry(1, 20, 20);
+    var material = new THREE.MeshBasicMaterial({color: 'blue', wireframe: true});
+    var sphere = new THREE.Mesh(geometry, material);
+    scene.add(sphere);
+
+    var i = 0;
+    const radius = 3;
+    function animate() {
+        requestAnimationFrame(animate);
+        var theta = Math.PI / 180 * i;
+        var angle = theta * 5;
+        sphere.position.x = radius * Math.cos(angle);
+        sphere.position.y = 2 * theta;
+        sphere.position.z = radius * Math.sin(angle);
+
+        camera.rotateY(0.1);
+
+        controls.update();
+        renderer.render(scene, camera);
+        i++;
+    }
+
+    animate();
+
+</script>
+</body>
+</html>
