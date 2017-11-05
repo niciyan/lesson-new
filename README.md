@@ -10,5 +10,6 @@ https://secret-refuge-31039.herokuapp.com/
 * [Simple Sphire with camera control](./docs/small.html)
 * [Parabola Movie](./docs/3DMath/parabolaAndSphere.html)
 * [Circular Animation](./docs/Intro/miniCircularAnimation.html)
+* [Cylinder Movie](./docs/2D/vertices.html)
 
 
