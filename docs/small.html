@@ -5,21 +5,26 @@
     <title>nothing special</title>
 </head>
 <body>
-<script src="three.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
 <script src="OrbitControls.js"></script>
-<script src="templateProvider.js"></script>
+<script src="util.js"></script>
 <script>
-    var geometry = new THREE.SphereGeometry(1, 20, 20);
-    var material = new THREE.MeshBasicMaterial({color: 'blue', wireframe: true});
-    var sphere = new THREE.Mesh(geometry, material);
+    let renderer = createRenderer();
+    let camera = createCamera();
+    let scene = createScene();
+    let controls = createControls(camera, renderer.domElement);
+    let geometry = new THREE.SphereGeometry(1, 20, 20);
+    let material = new THREE.MeshBasicMaterial({color: 'blue', wireframe: true});
+    let sphere = new THREE.Mesh(geometry, material);
+    renderer.setClearColor('white');
     scene.add(sphere);
 
     sphere.position.set(0, 0, 0);
 
     camera.position.z = 5;
-    var render = function () {
+    let render = function () {
         requestAnimationFrame(render);
-        sphere.rotation.y += 0.005;
+        sphere.rotation.y += 0.003;
         controls.update();
         renderer.render(scene, camera);
     };
