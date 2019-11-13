@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>nothing special</title>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
+<script src="OrbitControls.js"></script>
+<script src="util.js"></script>
+<script>
+    let renderer = createRenderer();
+    let camera = createCamera();
+    let scene = createScene();
+    let controls = createControls(camera, renderer.domElement);
+    let geometry = new THREE.SphereGeometry(1, 20, 20);
+    let material = new THREE.MeshBasicMaterial({color: 'blue', wireframe: true});
+    let sphere = new THREE.Mesh(geometry, material);
+    renderer.setClearColor('white');
+    scene.add(sphere);
+
+    sphere.position.set(0, 0, 0);
+
+    camera.position.z = 5;
+    let render = function () {
+        requestAnimationFrame(render);
+        sphere.rotation.y += 0.003;
+        controls.update();
+        renderer.render(scene, camera);
+    };
+
+    render();
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>arrow</title>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
+<script src="util.js"></script>
+<script>
+    let renderer = createRenderer();
+    let camera = createCamera();
+    let scene = createScene();
+    let axis = new THREE.AxisHelper(10);
+    scene.add(axis);
+    let grid = new THREE.GridHelper(10,10);
+    scene.add(grid);
+
+    let arrow = new THREE.ArrowHelper(new THREE.Vector3(1, 1, 1).normalize(), new THREE.Vector3(0,0,0), 5);
+    scene.add(arrow);
+
+    let render = function () {
+        requestAnimationFrame(render);
+        i = Date.now() / 2000;
+        camera.position.set(10 * Math.cos(i), 6, 10 * Math.sin(i));
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        renderer.render(scene, camera);
+    };
+
+    render();
+</script>
+</body>
+</html>

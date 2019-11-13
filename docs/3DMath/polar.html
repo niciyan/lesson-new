@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Polar</title>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
+<script src="../OrbitControls.js"></script>
+<script src="../util.js"></script>
+<script>
+
+    camera = createCamera();
+
+    scene = createScene();
+    renderer = createRenderer();
+    // controls = createControls(camera, renderer.domElement);
+    camera.position.y = 10;
+    var radius = 10;
+    var radials = 16;
+    var circles = 8;
+    var divisions = 64;
+
+    var helper = new THREE.PolarGridHelper( radius, radials, circles, divisions );
+    scene.add( helper );
+
+    var t = 0;
+
+    function animate() {
+        requestAnimationFrame(animate);
+        const radius = 20;
+        camera.position.x = radius * Math.cos(t);
+        camera.position.z = radius * Math.sin(t);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        renderer.render(scene, camera);
+    }
+
+    animate();
+</script>
+</body>
+</html>

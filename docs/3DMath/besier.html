@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Besier Curve</title>
+</head>
+<body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
+<script src="../OrbitControls.js"></script>
+<script src="../util.js"></script>
+<script>
+    camera = createCamera();
+    scene = createScene();
+    renderer = createRenderer();
+    camera.position.y = 10;
+    const grid = new THREE.GridHelper(50, 10);
+    scene.add(grid);
+
+    const axis = new THREE.AxisHelper(50);
+    scene.add(axis);
+
+    let p1 = new THREE.Vector3( -10, 0, 0 );
+    let p2 = new THREE.Vector3( 20, 15, -20 );
+    let p3 = new THREE.Vector3( 10, 0, 0 );
+    var curve = new THREE.QuadraticBezierCurve3(
+        p1,
+        p2,
+        p3
+    );
+    var points = curve.getPoints(50);
+
+    var geometry = new THREE.BufferGeometry().setFromPoints(points);
+
+    var material = new THREE.LineBasicMaterial({color: 0xeeee22});
+    var curveObject = new THREE.Line(geometry, material);
+
+    scene.add(curveObject);
+
+    function drawLine(orig, dest, scene) {
+        let mate = new THREE.LineDashedMaterial({
+            color: 0xeeeeee,
+            dashSize: 3,
+            gapSize: 3,
+        });
+        let geo = new THREE.Geometry();
+        geo.vertices.push(
+            orig,
+            dest,
+        );
+
+        let line = new THREE.Line(geo, mate);
+        scene.add(line);
+    }
+
+    drawLine(p1,p2, scene);
+    drawLine(p2,p3, scene);
+
+    var t = 0;
+
+    console.log(curve.v1);
+
+    function animate() {
+        requestAnimationFrame(animate);
+        const radius = 50;
+        camera.position.x = radius * Math.cos(t);
+        camera.position.z = radius * Math.sin(t);
+        camera.lookAt(new THREE.Vector3(0, 0, 0));
+        curve.v1.add(new THREE.Vector3(0, 10 * Math.sin(t), 0));
+        renderer.render(scene, camera);
+        t += 0.001;
+    }
+
+    animate();
+</script>
+</body>
+</html>
