@@ -16,7 +16,6 @@
     let geometry = new THREE.SphereGeometry(1, 20, 20);
     let material = new THREE.MeshBasicMaterial({color: 'blue', wireframe: true});
     let sphere = new THREE.Mesh(geometry, material);
-    renderer.setClearColor('white');
     scene.add(sphere);
 
     sphere.position.set(0, 0, 0);

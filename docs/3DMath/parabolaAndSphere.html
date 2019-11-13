@@ -10,7 +10,10 @@
 <script src="../util.js"></script>
 <script>
     //    renderer.setClearColor('lightgray');
+    camera = createCamera();
 
+    scene = createScene();
+    renderer = createRenderer();
     var grid = new THREE.GridHelper(5, 1);
     scene.add(grid);
 
@@ -60,8 +63,6 @@
     var time = 0;
     function animate() {
         requestAnimationFrame(animate);
-//        controls.update();
-
         var theta = Math.PI / 180 * time;
         moveCamera(theta);
         moveSphere(theta);

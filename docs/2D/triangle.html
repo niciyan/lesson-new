@@ -9,6 +9,10 @@
 <script src="../OrbitControls.js"></script>
 <script src="../util.js"></script>
 <script>
+    let renderer = createRenderer();
+    let camera = createCamera();
+    let scene = createScene();
+    let controls = createControls(camera, renderer.domElement);
     renderer.setClearColor('lightgray');
     //    var a = new THREE.Vector3(1,0,0);
     //    var b = new THREE.Vector3(-1,0,0);
