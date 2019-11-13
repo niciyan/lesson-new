@@ -17,10 +17,7 @@ publish for my practice three.js and mathbox.js
 * [Rotate Arrow Animation by Quaternion (camera control)](docs/rotate_arrow_quaternion_animation.html)
 * [Group 1 (camera control)](docs/group.html)
 * [Group 2 (camera control)](docs/group2.html)
-
 * [Simple Sphire with camera control](./docs/small.html)
 * [Parabola Movie](./docs/3DMath/parabolaAndSphere.html)
 * [Circular Animation](./docs/Intro/miniCircularAnimation.html)
 * [Cylinder Movie](./docs/2D/vertices.html)
-
-
