@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Move Box</title>
+    <title>1 Box</title>
 </head>
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
@@ -30,8 +30,6 @@
 
     let render = function () {
         requestAnimationFrame(render);
-        i = Date.now() / 2000;
-        cube.position.x = 10 * Math.sin(i);
         renderer.render(scene, camera);
     };
 

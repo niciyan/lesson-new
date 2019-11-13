@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Move Box</title>
+    <title>2 Box Rotation(Quaternion)</title>
 </head>
 <body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/109/three.min.js"></script>
@@ -21,17 +21,26 @@
     let geo = new THREE.BoxGeometry(1,1,1);
     let mate = new THREE.MeshBasicMaterial({color: 'orange', wireframe: true});
 
-    let cube = new THREE.Mesh(geo, mate);
+    let cube1 = new THREE.Mesh(geo, mate);
+    let cube2 = new THREE.Mesh(geo, mate);
 
-    scene.add(cube);
+    scene.add(cube1);
+    scene.add(cube2);
+
+    cube1.translateX(2);
+    cube2.translateX(-2);
 
     camera.position.set(10, 10, 10);
+
     camera.lookAt(new THREE.Vector3(0, 0, 0));
+
+    let q = new THREE.Quaternion();
+    q.setFromAxisAngle(new THREE.Vector3(0, 1, 0), 0.01);
 
     let render = function () {
         requestAnimationFrame(render);
-        i = Date.now() / 2000;
-        cube.position.x = 10 * Math.sin(i);
+        cube1.position.applyQuaternion(q);
+        cube2.position.applyQuaternion(q);
         renderer.render(scene, camera);
     };
 
