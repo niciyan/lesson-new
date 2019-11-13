@@ -1,5 +1,4 @@
-# lesson
-publish for my practice three.js and mathbox.js
+publish for my practice three.js
 
 # link for Github Page
 [Visit Github Page](https://niciyan.github.io)
