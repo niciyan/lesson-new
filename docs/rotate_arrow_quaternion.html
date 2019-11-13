@@ -18,13 +18,13 @@
     let grid = new THREE.GridHelper(10,10);
     scene.add(grid);
 
-    let arrow = new THREE.ArrowHelper(new THREE.Vector3(-1,-1,-1).normalize(), new THREE.Vector3(0,0,0), 5);
+    let arrow = new THREE.ArrowHelper(new THREE.Vector3(1,1,1).normalize(), new THREE.Vector3(0,0,0), 5);
     let arrow_original = arrow.clone();
     arrow_original.setColor(new THREE.Color(0x11eeff));
     scene.add(arrow);
     scene.add(arrow_original);
 
-    camera.position.set(10,10,10);
+    camera.position.set(3,6,10);
     camera.lookAt(new THREE.Vector3(0, 0, 0));
 
     let q = new THREE.Quaternion();
