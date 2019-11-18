@@ -1,6 +1,5 @@
 publish for my practice three.js
 
-# link for Github Page
 [Visit Github Page](https://niciyan.github.io)
 
 # Three.js codings
